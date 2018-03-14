@@ -1,0 +1,16 @@
+{
+  "name": "echarts-server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "description": "echarts server side render",
+  "author": {
+    "name": "Nothing"
+  },
+  "dependencies": {
+    "canvas": "^2.0.0-alpha.11",
+    "echarts": "^4.0.4"
+  }
+}
