@@ -38,42 +38,41 @@ function queryString(url) {
 }
 
 function createImage(width, height, option) {
-    var width = parseInt(width || '800');
-    var height = parseInt(height || '600');
-    echarts.setCanvasCreator(function () {
-        return ctx;
-    });
-    var ctx = Canvas.createCanvas(width, height);
-    var chart;
-    option.animation = false;
-    chart = echarts.init(ctx);
-    chart.setOption(option);
-    // res.set("Content-Type","image/png");
-    // res.status(200).send(chart.getDom().toBuffer());
-    return chart
-        .getDom()
-        .toBuffer();
+    return new Promise((resolve) => {
+        echarts.setCanvasCreator(() => {
+            return ctx;
+        });
+        var ctx = Canvas.createCanvas(parseInt(width), parseInt(height));
+        var chart;
+        option.animation = false;
+        chart = echarts.init(ctx);
+        chart.setOption(option);
+        var buffer = chart.getDom().toBuffer();
+        resolve(buffer);
+        chart.dispose();
+    })
 }
 
-http.createServer(function (req, res) {
-        if (req.method == "POST") {
-            var qs = queryString(req.url);
-            var bodyStr = "",
-                width = qs.w || '800',
-                height = qs.h || '600';
-            req.on('data', function (chunk) {
-                bodyStr += chunk;
-            });
-            req.on('end', function () {
-                var option = JSON.parse(bodyStr);
-                var buffer = createImage(width, height, option);
+http.createServer((req, res) => {
+    if (req.method == "POST") {
+        var qs = queryString(req.url);
+        var bodyStr = "",
+            width = qs.w || '800',
+            height = qs.h || '600';
+        req.on('data', (chunk) => {
+            bodyStr += chunk;
+        });
+        req.on('end', () => {
+            var option = JSON.parse(bodyStr);
+            createImage(width, height, option).then((buffer) => {
                 res.writeHead(200, {'Content-Type': 'image/png'});
                 res.end(buffer);
             });
-        } else {
-            res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end('Hello World\n');
-        }
-    }).listen(port,function(){
-        console.log("Server is running at:0.0.0.0:"+ port);
-    });
+        });
+    } else {
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('Hello World\n');
+    }
+}).listen(port, () => {
+    console.log("Server is running at:0.0.0.0:" + port);
+});
