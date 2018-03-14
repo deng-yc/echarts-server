@@ -23,7 +23,10 @@ npm start
 
 # 使用
 
-将echarts的配置POST到localhost:3000即可
+将echarts的配置POST到http://localhost:3000?w=800&h=500
+
+其中w是生成图片宽,h是生成图片高
+
 
 
 
