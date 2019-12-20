@@ -3,7 +3,6 @@ node {
         'REGISTRY_API=ccr.ccs.tencentyun.com/eeeban',
         'ROOT_DOMAIN=eeeban.com'
     ]){
-        ws("/${ITEM_ROOTDIR}/chat-processor") {
             stage('获取代码') {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']],
                     doGenerateSubmoduleConfigurations: false,
@@ -31,5 +30,4 @@ node {
                 }
             }
         }
-    }
 }
