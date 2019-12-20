@@ -29,7 +29,7 @@ node {
                 ]],
                 submoduleCfg: [],
                 userRemoteConfigs: [[
-                    credentialsId: 'caskia',
+                    credentialsId: 'dengyc',
                     url: 'https://github.com/deng-yc/echarts-server.git'
                 ]]
             ])
