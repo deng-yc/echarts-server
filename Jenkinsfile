@@ -25,7 +25,7 @@ node {
             stage('编译镜像') {
                 withDockerRegistry(credentialsId: 'docker-registry', url: 'https://ccr.ccs.tencentyun.com') {
                     def app = docker.build("echart-server:${tag}","-f Dockerfile .");
-                    app.push(tag);
+                    app.push("${tag}");
                     app.push("build-${BUILD_NUMBER}")
                 }
             }
