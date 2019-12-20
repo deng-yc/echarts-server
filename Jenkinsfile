@@ -1,4 +1,4 @@
-node {
+node{
     def tag='latest';
     def aspnet_env='Production'
     def k8s_namespace="hehe"
