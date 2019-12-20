@@ -17,7 +17,7 @@ node {
                     submoduleCfg: [],
                     userRemoteConfigs: [[
                         credentialsId: 'dengyc',
-                        url: 'https://gitee.com/talkless/SmartLearn.git'
+                        url: 'https://github.com/deng-yc/echarts-server.git'
                     ]]
                 ])
             }
