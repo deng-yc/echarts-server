@@ -10,7 +10,7 @@
     "name": "Nothing"
   },
   "dependencies": {
-    "canvas": "^2.0.0-alpha.11",
+    "canvas": "^2.11.2",
     "echarts": "^4.0.4"
   }
 }
